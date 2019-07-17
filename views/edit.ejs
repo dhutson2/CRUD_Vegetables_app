@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="/css/app.css">
+    </head>
+    <body>
+        <h1>Edit Veggie Page</h1>
+        <form method='POST' action='/vegetables/<%=index%>?_method=PUT%>'>
+            <!--  NOTE: the form is pre-populated with values for the server-->
+            Name: <input type="text" name="name" value="<%=vegetable.name%>"/><br/>
+            Color: <input type="text" name="color" value="<%=vegetable.color%>"/><br/>
+            Is Ready To Eat:
+            <input type="checkbox" name="readyToEat"
+                <% if(vegetable.readyToEat === true){ %>
+                checked
+                <% } %>
+            />
+            <br/>
+            <input type="submit" name="_method" value="submit changes"/>
+        </form>
+    </body>
+</html>

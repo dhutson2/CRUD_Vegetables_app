@@ -14,6 +14,7 @@ app.get('/', (req,res) => {
     res.send(Vegetables)
 })
 
+// route to display current list of vegetables (model)
 app.get('/vegetables', (req,res) => {
     res.render('index.ejs', {
         vegetables: Vegetables
@@ -24,6 +25,7 @@ app.get('/vegetables/new', (req,res) => {
     res.render('new.ejs')
 })
 
+// get and post routes to edit a vegetable existing in list
 app.get('/vegetables/:index/edit', (req,res) => {
     res.render('edit.ejs', {
         vegetable: Vegetables[req.params.index],
@@ -38,6 +40,12 @@ app.put('/vegetables/:index', (req,res) => {
         req.body.readyToEat = false
     }
     Vegetables[req.params.index] = req.body
+    res.redirect('/vegetables')
+})
+
+// route to delete an item from vegetable list
+app.delete('/vegetables/:index', (req,res) => {
+    Vegetables.splice(req.params.index, 1)
     res.redirect('/vegetables')
 })
 

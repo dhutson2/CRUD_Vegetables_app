@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="/css/app.css">
+    </head>
+    <body>
+        <h1>Vegetables store</h1>
+        <ul>
+            <% for(let i = 0; i < vegetables.length; i++){ %>
+                <li>
+            The <a href="/vegetables/<%=i%>"><%=vegetables[i].name;%></a> is  <%=vegetables[i].color; %>.
+            <% if(vegetables[i].readyToEat === true){ %>
+                It is ready to eat
+            <% } else { %>
+                It is not ready to eat
+            <% } %>
+            <!--  ADD DELETE FORM HERE-->
+            <form method="POST" action="/vegetables/<%=i%>?_method=DELETE">
+                <input type="submit" name="_method" value="DELETE"/>
+            </form>
+                </li>
+            <% } %>
+        </ul>
+        <nav>
+            <a href="/Vegetables/new">Create a New Fruit</a>
+        </nav>
+    </body>
+</html>

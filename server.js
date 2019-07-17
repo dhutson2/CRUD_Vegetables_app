@@ -14,7 +14,15 @@ app.get('/', (req,res) => {
     res.send(Vegetables)
 })
 
+app.get('/vegetables', (req,res) => {
+    res.render('index.ejs', {
+        vegetables: Vegetables
+    })
+})
 
+app.get('/vegetables/:index', (req, res) => {
+    res.send('im a veggie page!')
+})
 
 
 

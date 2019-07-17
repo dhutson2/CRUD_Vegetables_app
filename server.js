@@ -20,6 +20,21 @@ app.get('/vegetables', (req,res) => {
     })
 })
 
+app.get('/vegetables/new', (req,res) => {
+    res.render('new.ejs')
+})
+
+app.post('/vegetables/', (req,res) => {
+    console.log(req.body)
+    if(req.body.readyToEat === 'on'){
+        req.body.readyToEat = true
+    } else{
+        req.body.readyToEat = false
+    }
+    Vegetables.push(req.body)
+    res.redirect('/vegetables')
+})
+
 app.get('/vegetables/:index', (req, res) => {
     res.render('show.ejs', {
         vegetable: Vegetables[req.params.index]

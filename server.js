@@ -21,7 +21,9 @@ app.get('/vegetables', (req,res) => {
 })
 
 app.get('/vegetables/:index', (req, res) => {
-    res.send('im a veggie page!')
+    res.render('show.ejs', {
+        vegetable: Vegetables[req.params.index]
+    })
 })
 
 

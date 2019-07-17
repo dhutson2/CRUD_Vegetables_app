@@ -9,69 +9,10 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'))
 
-
-app.get('/', (req,res) => {
-    res.send(Vegetables)
-})
-
-// route to display current list of vegetables (model)
-app.get('/vegetables', (req,res) => {
-    res.render('index.ejs', {
-        vegetables: Vegetables
-    })
-})
-
-app.get('/vegetables/new', (req,res) => {
-    res.render('new.ejs')
-})
-
-// get and post routes to edit a vegetable existing in list
-app.get('/vegetables/:index/edit', (req,res) => {
-    res.render('edit.ejs', {
-        vegetable: Vegetables[req.params.index],
-        index: req.params.index
-    })
-})
-
-app.put('/vegetables/:index', (req,res) => {
-    if(req.body.readyToEat === 'on'){
-        req.body.readyToEat = true
-    } else {
-        req.body.readyToEat = false
-    }
-    Vegetables[req.params.index] = req.body
-    res.redirect('/vegetables')
-})
-
-// route to delete an item from vegetable list
-app.delete('/vegetables/:index', (req,res) => {
-    Vegetables.splice(req.params.index, 1)
-    res.redirect('/vegetables')
-})
-
-app.post('/vegetables/', (req,res) => {
-    console.log(req.body)
-    if(req.body.readyToEat === 'on'){
-        req.body.readyToEat = true
-    } else{
-        req.body.readyToEat = false
-    }
-    Vegetables.push(req.body)
-    res.redirect('/vegetables')
-})
-
-app.get('/vegetables/:index', (req, res) => {
-    res.render('show.ejs', {
-        vegetable: Vegetables[req.params.index]
-    })
-})
+const vegetableController = require('./controllers/vegetables')
 
 
-
-
-
-
-
+app.use('/vegetables', vegetableController)
 
 
 app.listen(3000, () => {
